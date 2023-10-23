@@ -30,7 +30,7 @@ public class RegistrationController {
             model.addAttribute("message", "Username already exists. Please choose another username.");
            return ResponseEntity.ok("Username already exists. Please choose another username.");
         }
-        userService.createUser(username, password);
+        userService.saveUser(username, password);
         model.addAttribute("message", "Registration successful. You can now log in.");
         return ResponseEntity.ok("Registration successful. You can now log in.");
     }

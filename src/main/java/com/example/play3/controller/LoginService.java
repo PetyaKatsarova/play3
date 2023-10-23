@@ -1,7 +1,7 @@
 package com.example.play3.controller;
 
 import com.example.play3.domain.User;
-import com.example.play3.persistancy.UserRepository;
+import com.example.play3.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
