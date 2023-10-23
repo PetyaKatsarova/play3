@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+</head>
+<body>
+<h1>Registration Form</h1>
+<!--<form action="/register" method="POST">-->
+<form id="registrationForm">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required><br><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br><br>
+    <label for="passwordConfirm">Password Confirm:</label>
+    <input type="password" id="passwordConfirm" name="passwordConfirm" required><br><br>
+
+    <input type="submit" value="Register">
+</form>
+<span th:text="${message}"></span>
+
+<script>
+    document.getElementById('registrationForm').addEventListener('submit', function (e) {
+        e.preventDefault();  // Prevent the default form submission
+
+        if (document.querySelector("#password").value !== document.querySelector("#passwordConfirm").value) {
+            alert("your pword and confirmedpwd dont match, fix it");
+            return;
+        }
+
+        const formData = new FormData(e.target);
+
+        fetch('http://localhost:8080/register', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                // Handle success, maybe redirect or update the UI
+                window.location.href = 'http://localhost:8080/login';
+            })
+            .catch(error => {
+                alert('Error registering: ' + error);
+                // Handle error
+            });
+    });
+
+</script>
+
+</body>
+</html>
+
