@@ -21,8 +21,11 @@ public class User {
     @Column(nullable = false)
     private String salt;
 
-    @Column(name = "jwt_token")
+    @Column(name = "jwt_token", length = 501)
     private String jwtToken;
+
+    @Column(unique = true, nullable = false)
+    private String email;
 
     // Getters, setters, constructors, etc. go here
 
@@ -30,11 +33,14 @@ public class User {
         // Default constructor
     }
 
-    public User(String username, String password, String jwtToken) {
+    public User(String username, String password, String jwtToken, String email) {
+        System.out.println("JWT Token length: " + jwtToken.length());
+
         this.username = username;
         this.password = password;
         this.salt = password + "_salted_with_" + "username";
         this.jwtToken = jwtToken;
+        this.email = email;
     }
 
     public Long getId() {
@@ -75,6 +81,14 @@ public class User {
 
     public void setJwtToken(String jwtToken) {
         this.jwtToken = jwtToken;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
 

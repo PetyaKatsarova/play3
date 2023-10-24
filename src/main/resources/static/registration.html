@@ -11,6 +11,8 @@
 <form id="registrationForm">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required><br><br>
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" required><br><br>
 
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required><br><br>
@@ -39,12 +41,11 @@
             .then(response => response.text())
             .then(data => {
                 alert(data);
-                // Handle success, maybe redirect or update the UI
-                window.location.href = 'http://localhost:8080/login';
+                if (data === "Registration successful. You can now log in.")
+                    window.location.href = 'http://localhost:8080/login';
             })
             .catch(error => {
                 alert('Error registering: ' + error);
-                // Handle error
             });
     });
 

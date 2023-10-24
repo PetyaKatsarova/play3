@@ -24,15 +24,14 @@ public class RegistrationController {
 
     @CrossOrigin(origins = "*")
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestParam String username, @RequestParam String password, Model model) {
-
-        if (userService.usernameExists(username)) {
-            model.addAttribute("message", "Username already exists. Please choose another username.");
-           return ResponseEntity.ok("Username already exists. Please choose another username.");
-        }
-        userService.saveUser(username, password);
-        model.addAttribute("message", "Registration successful. You can now log in.");
-        return ResponseEntity.ok("Registration successful. You can now log in.");
+    public ResponseEntity<String> registerUser(@RequestParam String username, @RequestParam String password,
+                                               @RequestParam String email, Model model) {
+        // checks if username or email already exists are done in the saveUser method
+        String message = userService.saveUser(username, password, email);
+        model.addAttribute("message", message);
+        if (message.equals("User was saved succesfully."))
+            return ResponseEntity.ok("Registration successful. You can now log in.");
+        return ResponseEntity.ok(message);
     }
 
     @CrossOrigin(origins = "*")
