@@ -2,6 +2,8 @@ package com.example.play3.domain;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "user", uniqueConstraints = {
         @UniqueConstraint(columnNames = "username")
@@ -27,20 +29,38 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
-    // Getters, setters, constructors, etc. go here
+    @Column
+    private boolean verified;
+
+    @Column(name = "verification_token")
+    private String verificationToken;
+
+    @Column(name = "verification_token_expiry_time")
+    private Date tokenExpirationTime;
+
+//    @Column(name = "expiration_date")
+//    private Date expirationDate;
 
     public User() {
-        // Default constructor
     }
 
-    public User(String username, String password, String jwtToken, String email) {
+    public User(String email, String username, String password, String jwtToken, String  salt) {
         System.out.println("JWT Token length: " + jwtToken.length());
 
         this.username = username;
         this.password = password;
-        this.salt = password + "_salted_with_" + "username";
+        this.salt = salt;
         this.jwtToken = jwtToken;
         this.email = email;
+        this.verified = false;
+    }
+
+    public User(String username, String email, String password, String salt) {
+        this.username = username;
+        this.password = password;
+        this.salt = salt;
+        this.email = email;
+        this.verified = false;
     }
 
     public Long getId() {
@@ -89,6 +109,30 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+
+    public String getVerificationToken() {
+        return verificationToken;
+    }
+
+    public void setVerificationToken(String verificationToken) {
+        this.verificationToken = verificationToken;
+    }
+
+    public Date getTokenExpirationTime() {
+        return tokenExpirationTime;
+    }
+
+    public void setTokenExpirationTime(Date tokenExpirationTime) {
+        this.tokenExpirationTime = tokenExpirationTime;
     }
 }
 

@@ -1,12 +1,16 @@
 package com.example.play3.utils.security.password;
 
+import org.hibernate.annotations.Comment;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.security.SecureRandom;
 
+@Component
 public class SaltMaker {
 
-    private SecureRandom srng;
-    private int saltLength;
-
+    private SecureRandom    srng;
+    private int             saltLength;
     public static final int STANDARD_SALT_LENGTH = 8;
     public static final int MINIMUM_SALT_LENGTH = 1;
     public static final int MAXIMUM_SALT_LENGTH = 20;
