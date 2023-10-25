@@ -2,6 +2,7 @@ package com.example.play3.domain;
 
 import jakarta.persistence.*;
 
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -29,8 +30,8 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
-    @Column
-    private boolean verified;
+    @Column(name = "is_verified")
+    private boolean isVerified;
 
     @Column(name = "verification_token")
     private String verificationToken;
@@ -38,29 +39,38 @@ public class User {
     @Column(name = "verification_token_expiry_time")
     private Date tokenExpirationTime;
 
-//    @Column(name = "expiration_date")
-//    private Date expirationDate;
+    private static int EXPIRATION_TIME = 15;
 
     public User() {
     }
 
-    public User(String email, String username, String password, String jwtToken, String  salt) {
-        System.out.println("JWT Token length: " + jwtToken.length());
-
-        this.username = username;
-        this.password = password;
-        this.salt = salt;
-        this.jwtToken = jwtToken;
-        this.email = email;
-        this.verified = false;
-    }
+//    public User(String username, String email, String password, String jwtToken, String  salt) {
+//        System.out.println("JWT Token length: " + jwtToken.length());
+//
+//        this.username = username;
+//        this.email = email;
+//        this.password = password;
+//        this.salt = salt;
+//        this.jwtToken = jwtToken;
+//        this.isVerified = false;
+//        this.tokenExpirationTime = null;
+//        this.verificationToken = null;
+//    }
 
     public User(String username, String email, String password, String salt) {
         this.username = username;
+        this.email = email;
         this.password = password;
         this.salt = salt;
-        this.email = email;
-        this.verified = false;
+        this.isVerified = false;
+        this.tokenExpirationTime = null;
+        this.verificationToken = null;
+    }
+
+    public Date createTokenExpirationTime() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MINUTE, EXPIRATION_TIME);
+        return calendar.getTime();
     }
 
     public Long getId() {
@@ -112,11 +122,11 @@ public class User {
     }
 
     public boolean isVerified() {
-        return verified;
+        return isVerified;
     }
 
     public void setVerified(boolean verified) {
-        this.verified = verified;
+        this.isVerified = verified;
     }
 
     public String getVerificationToken() {
@@ -127,12 +137,13 @@ public class User {
         this.verificationToken = verificationToken;
     }
 
-    public Date getTokenExpirationTime() {
-        return tokenExpirationTime;
-    }
-
     public void setTokenExpirationTime(Date tokenExpirationTime) {
         this.tokenExpirationTime = tokenExpirationTime;
     }
+
+    public void setExpirationTimeInMinutes(int minutes) {
+        EXPIRATION_TIME = minutes;
+    }
+
 }
 

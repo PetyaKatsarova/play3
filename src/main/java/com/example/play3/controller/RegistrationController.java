@@ -25,10 +25,10 @@ public class RegistrationController {
 
     @CrossOrigin(origins = "*")
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestParam String username, @RequestParam String password,
-                                               @RequestParam String email, Model model) throws NoSuchAlgorithmException {
+    public ResponseEntity<String> registerUser(@RequestParam String username,  @RequestParam String email,
+                                               @RequestParam String password, Model model) throws NoSuchAlgorithmException {
         // checks if username or email already exists are done in the saveUser method
-        String message = userService.registerUser(username, password, email);
+        String message = userService.registerUser(username, email, password);
         model.addAttribute("message", message);
         if (message.equals("User was saved succesfully."))
             return ResponseEntity.ok("Registration successful. You can now log in.");
