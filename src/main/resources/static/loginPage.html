@@ -22,11 +22,15 @@
     document.getElementById('loginForm').addEventListener('submit', function (e) {
         e.preventDefault();  // Prevent the default form submission
 
-        const formData = new FormData(e.target);
+        let username = document.getElementById('username').value;
+        let password = document.getElementById('password').value;
 
-        fetch('http://localhost:8080/verifyEmail', {
+        fetch('http://localhost:8080/login', {
             method: 'POST',
-            body: formData
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({username: username, password: password})
         })
             .then(response => response.json())
             .then(data => {
@@ -39,6 +43,27 @@
             .catch(error => {
                 alert('Error during login: ' + error);
             });
+
+
+
+        // const formData = new FormData(e.target);
+
+        // // fetch('http://localhost:8080/verifyEmail', {
+        // fetch('http://localhost:8080/login', {
+        //     method: 'POST',
+        //     body: formData
+        // })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         if (data.success) {
+        //             window.location.href = '/loggedin.html';
+        //         } else {
+        //             alert(data.message);
+        //         }
+        //     })
+        //     .catch(error => {
+        //         alert('Error during login: ' + error);
+        //     });
     });
 </script>
 </body>

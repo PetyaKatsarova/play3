@@ -22,13 +22,13 @@ public class LoginService {
         this.userRepository = userRepository;
         this.hashService = hashService;
     }
-    public boolean authenticateUser(User user) throws NoSuchAlgorithmException {
+    public boolean authenticateUser(String username, String passsword) throws NoSuchAlgorithmException {
         boolean userCanEnter = false;
-        User loginUser = userRepository.findUserByEmail(user.getEmail()).orElse(null);
+        User loginUser = userRepository.findUserByUsername(username).orElse(null);
         if (loginUser != null) {
             String hashedPW = loginUser.getPassword();
             String salt = loginUser.getSalt();
-            String toBechecked = getHashFromHashSalt(hashService.hash(user.getPassword(), salt));
+            String toBechecked = getHashFromHashSalt(hashService.hash(passsword, salt));
             if (hashedPW.equals(toBechecked) && loginUser.isVerified()) {
                 userCanEnter = true;
             }

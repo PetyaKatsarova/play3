@@ -27,7 +27,7 @@ public class RegistrationService {
     }
 
     public String registerUser(String username, String email, String password) throws NoSuchAlgorithmException {
-        if (userRepository.findByUsername(username).isPresent())
+        if (userRepository.findUserByUsername(username).isPresent())
             return "User with this username already exists. Try another one";
         if (userRepository.findByEmail(email).isPresent())
             return "User with this email already exists. Try another one";
@@ -48,13 +48,13 @@ public class RegistrationService {
     public void verifyUserToken(String token) throws IllegalArgumentException {
         try {
             User user = userRepository.findByVerificationToken(token).orElse(null);
-            System.out.println(user);
+            System.out.println("registr.service: verifyusertoken: "+ user);
 
             if (user != null) {
                 user.setVerified(true);
                 userRepository.save(user);
             } else {
-                throw new IllegalArgumentException("Invalid verification token.");
+                throw new IllegalArgumentException("Invalid verification token from registrationservice, verifyusertoken.");
             }
 
         } catch (Exception ex) {
