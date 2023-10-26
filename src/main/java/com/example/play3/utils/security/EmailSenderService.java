@@ -12,7 +12,7 @@ import java.io.UnsupportedEncodingException;
 @Service
 public class EmailSenderService {
     @Autowired
-    private JavaMailSender mailSender;
+    private JavaMailSender      mailSender;
 
     private static final String SENDER_EMAIL = "pskpetya@gmail.com";
     private static final String SENDER_NAME = "Hello World";

@@ -16,13 +16,15 @@
 
     <button type="submit">Login</button>
 </form>
+<br>
+<a href="/play3/src/main/resources/static/registration.html">Don't have an account? Register now!</a>
 <script>
     document.getElementById('loginForm').addEventListener('submit', function (e) {
         e.preventDefault();  // Prevent the default form submission
 
         const formData = new FormData(e.target);
 
-        fetch('http://localhost:8080/verifyLogin', {
+        fetch('http://localhost:8080/verifyEmail', {
             method: 'POST',
             body: formData
         })
