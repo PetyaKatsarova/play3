@@ -1,4 +1,4 @@
-package com.example.play3.controller;
+package com.example.play3.communication.controller;
 
 import com.example.play3.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -7,8 +7,9 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.UUID;
+
 import static com.example.play3.utils.security.password.HashAndSaltUtil.getHashFromHashSalt;
 import static com.example.play3.utils.security.password.HashAndSaltUtil.getSaltFromHashSalt;
 
@@ -51,6 +52,10 @@ public class RegistrationService {
             System.out.println("registr.service: verifyusertoken: "+ user);
 
             if (user != null) {
+                System.out.println(user.getTokenExpirationTime());
+                if (new Date().after(user.getTokenExpirationTime())) {
+                    throw new IllegalArgumentException("Verification token has expired.");
+                }
                 user.setVerified(true);
                 userRepository.save(user);
             } else {

@@ -1,5 +1,6 @@
-package com.example.play3.controller;
+package com.example.play3.communication.controller;
 
+import com.example.play3.communication.dto.UserRegistrationDTO;
 import com.example.play3.domain.User;
 import com.example.play3.service.LoginService;
 import com.example.play3.service.RegistrationService;
@@ -33,21 +34,38 @@ public class RegistrationController {
         return ResponseEntity.ok("[play3 project, /test says]: Hello world :)");
     }
 
+//    @CrossOrigin(origins = "*")
+//    @PostMapping("/register")
+//    public ResponseEntity<String> registerUser(@RequestParam String username, @RequestParam String email,
+//                                               @RequestParam String password, Model model, final HttpServletRequest req) throws NoSuchAlgorithmException {
+//        try {
+//            String message = registrationService.registerUser(username, email, password);  // checks if username or email already exists are done in the registerUser method
+//            User user = registrationService.getUser();
+//            publisher.publishEvent(new RegistrationCompleteEvent(user, applicationUlr(req)));
+//            if (message.equals("User was saved succesfully."))
+//                return ResponseEntity.ok("Registration successful. Please go to your email to confirm your membership before loggin in.");
+//            return ResponseEntity.ok(message);
+//        } catch (NoSuchAlgorithmException ex) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("from registration controller: " + ex.getMessage());
+//        }
+//    }
+
     @CrossOrigin(origins = "*")
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestParam String username, @RequestParam String email,
-                                               @RequestParam String password, Model model, final HttpServletRequest req) throws NoSuchAlgorithmException {
+    public ResponseEntity<String> registerUser(@RequestBody UserRegistrationDTO userRegistrationDTO, final HttpServletRequest req) {
         try {
-            String message = registrationService.registerUser(username, email, password);  // checks if username or email already exists are done in the registerUser method
+            String message = registrationService.registerUser(userRegistrationDTO.getUsername(), userRegistrationDTO.getEmail(), userRegistrationDTO.getPassword());  // checks if username or email already exists are done in the registerUser method
             User user = registrationService.getUser();
             publisher.publishEvent(new RegistrationCompleteEvent(user, applicationUlr(req)));
-            if (message.equals("User was saved succesfully."))
-                return ResponseEntity.ok("Registration successful. Please go to your email to confirm your membership before loggin in.");
+            if (message.equals("User was saved successfully.")) {
+                return ResponseEntity.ok("Registration successful. Please go to your email to confirm your membership before logging in.");
+            }
             return ResponseEntity.ok(message);
         } catch (NoSuchAlgorithmException ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("from registration controller: " + ex.getMessage());
         }
     }
+
 
     private String applicationUlr(HttpServletRequest req) {
         return "http://" + req.getServerName() + ":" + req.getServerPort() + req.getContextPath();

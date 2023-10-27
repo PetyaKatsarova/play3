@@ -28,6 +28,8 @@ public class User {
     private String password;
     @Column(nullable = false)
     private String salt;
+    @Column(length = 255)
+    private String jwtToken;
     private static int EXPIRATION_TIME = 15;
 
     public User() {
@@ -41,6 +43,7 @@ public class User {
         this.isVerified = false;
         this.tokenExpirationTime = createTokenExpirationTime();
         this.verificationToken = UUID.randomUUID().toString();
+        this.jwtToken = null;
     }
 
     public User(String username, String email, String password, String salt) {
@@ -51,6 +54,18 @@ public class User {
         this.isVerified = false;
         this.tokenExpirationTime = createTokenExpirationTime();
         this.verificationToken = UUID.randomUUID().toString();
+        this.jwtToken = null;
+    }
+
+    public User(String username, String email, String password, String salt, String jwtToken) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.salt = salt;
+        this.isVerified = false;
+        this.tokenExpirationTime = createTokenExpirationTime();
+        this.verificationToken = UUID.randomUUID().toString();
+        this.jwtToken = jwtToken;
     }
 
     private Date createTokenExpirationTime() {
@@ -84,6 +99,7 @@ public class User {
                 ", salt='" + salt + '\'' +
                 ", verificationToken='" + verificationToken + '\'' +
                 ", tokenExpirationTime='" + tokenExpirationTime + '\'' +
+                ", jwtToken=" + jwtToken +
                 '}';
     }
 
