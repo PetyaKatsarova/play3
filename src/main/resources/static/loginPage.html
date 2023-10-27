@@ -35,9 +35,9 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    window.location.href = '/loggedin.html';
+                    window.location.href = "http://localhost:8080/loggedin.html";
                 } else {
-                    alert(data.message);
+                    alert("kuku, sth is wrong "+ data.message);
                 }
             })
             .catch(error => {
