@@ -3,12 +3,10 @@ package com.example.play3.service;
 import com.example.play3.domain.User;
 import com.example.play3.repository.UserRepository;
 import com.example.play3.utils.security.password.HashService;
+import com.example.play3.utils.security.token.JWTToken;
 import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
 
 import static com.example.play3.utils.security.password.HashAndSaltUtil.getHashFromHashSalt;
 
@@ -17,23 +15,25 @@ public class LoginService {
 
     private final UserRepository    userRepository;
     private final HashService       hashService;
-
-    public LoginService(UserRepository userRepository, HashService hashService) {
+    private final JWTToken          jwtToken;
+    public LoginService(UserRepository userRepository, HashService hashService, JWTToken jwtToken) {
         this.userRepository = userRepository;
         this.hashService = hashService;
+        this.jwtToken = jwtToken;
     }
-    public boolean authenticateUser(String username, String passsword) throws NoSuchAlgorithmException {
-        boolean userCanEnter = false;
-        User loginUser = userRepository.findUserByUsername(username).orElse(null);
+    public User authenticateUser(String email, String password) throws NoSuchAlgorithmException {
+        User loginUser = userRepository.findByEmail(email).orElse(null);
         if (loginUser != null) {
             String hashedPW = loginUser.getPassword();
             String salt = loginUser.getSalt();
-            String toBechecked = getHashFromHashSalt(hashService.hash(passsword, salt));
-            if (hashedPW.equals(toBechecked) && loginUser.isVerified()) {
-                userCanEnter = true;
-            }
+            String toBechecked = getHashFromHashSalt(hashService.hash(password, salt));
+            if (!(hashedPW.equals(toBechecked) && loginUser.isVerified()))
+                return null;
         }
-        return userCanEnter;
+        return loginUser;
     }
 
+    public String generateJWTToken(String email) {
+        return jwtToken.generateJWTToken(email);
+    }
 }

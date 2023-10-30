@@ -23,3 +23,22 @@ spring.mail.properties.mail.smtp.starttls.enable=true
 #Trust all certificates (NOT recommended for production)
 spring.mail.properties.mail.smtp.ssl.trust=*
 
+********************** USER STORIES *********************
+
+As a tenant, I want to be able to register on the holiday homes site so I can find a cottage.
+As a tenant, I want to be able to log in to the holiday homes site so I can find a cottage.
+As a landlord, I want to be able to register on the holiday homes site so I can offer cottages for rent.
+As a landlord, I want to be able to log in to the holiday homes site so I can offer a cottage for rent.
+As a landlord, I want to offer a cottage so others can rent it.
+As a tenant, I want to be able to find suitable cottages through a search so I can book them.
+As a landlord, I want an overview of my own cottages so I can manage them.
+As a tenant, I want an overview of my reservations so I can manage them.
+As a landlord, I want to be able to cancel a reservation for a cottage so I can retain control over my cottage.
+As a tenant, I want to be able to cancel my reservation so I can retain control over my reservations.
+As both a tenant and a landlord, I want to send a message to another tenant or landlord so I can make contact.
+As both a tenant and a landlord, I want to read my received messages so I can send replies.
+As both a tenant and a landlord, I want to be able to delete my received messages so my inbox doesn't get too full.
+As a landlord, I want to be able to block tenants so they cannot rent my cottage.
+As a landlord, I want to be able to change my cottages so I can correct mistakes.
+As both a tenant and a landlord, I want to safely reset my password if I've forgotten it so I'm not locked out.
+

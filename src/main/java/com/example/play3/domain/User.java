@@ -166,5 +166,13 @@ public class User {
     public Date getTokenExpirationTime() {
         return tokenExpirationTime;
     }
+
+    public String getJwtToken() {
+        return jwtToken;
+    }
+
+    public void setJwtToken(String jwtToken) {
+        this.jwtToken = jwtToken;
+    }
 }
 
