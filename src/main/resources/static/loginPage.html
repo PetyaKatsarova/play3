@@ -17,7 +17,8 @@
     <button type="submit">Login</button>
 </form>
 <br>
-<a href="/play3/src/main/resources/static/registration.html">Don't have an account? Register now!</a>
+<!--<a href="/play3/src/main/resources/static/registration.html">Don't have an account? Register now!</a>-->
+<a href="/registration.html">Don't have an account? Register now!</a>
 <script>
     document.getElementById('loginForm').addEventListener('submit', function (e) {
         e.preventDefault();  // Prevent the default form submission
@@ -37,7 +38,8 @@
             .then(data => {
                 if (data.success) {
                     localStorage.setItem("jwtToken", data.jwtToken);
-                    window.location.href = "http://localhost:8080/loggedin.html";
+                    window.location.href = "loggedin.html";
+                    window.location.href = "/login";
                 } else {
                     console.log(data);
                     alert("kuku, sth is wrong " + data.message);

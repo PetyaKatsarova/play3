@@ -23,14 +23,21 @@ spring.mail.properties.mail.smtp.starttls.enable=true
 #Trust all certificates (NOT recommended for production)
 spring.mail.properties.mail.smtp.ssl.trust=*
 
+---- end of application.properties file ------------------
+
+!NB: open from browser with url: "localhost:8080/loginPage.html"
+if you open the .html files from intelij, it opens with localhost:63342/....the complete project route....
+
 ********************** USER STORIES *********************
 
-As a tenant, I want to be able to register on the holiday homes site so I can find a cottage.
-As a tenant, I want to be able to log in to the holiday homes site so I can find a cottage.
-As a landlord, I want to be able to register on the holiday homes site so I can offer cottages for rent.
-As a landlord, I want to be able to log in to the holiday homes site so I can offer a cottage for rent.
-As a landlord, I want to offer a cottage so others can rent it.
+As a tenant, I want to be able to register on the holiday homes site so I can find a cottage.✅ user: same for tenant and landlord
+As a tenant, I want to be able to log in to the holiday homes site so I can find a cottage. 
 As a tenant, I want to be able to find suitable cottages through a search so I can book them.
+
+As a landlord, I want to be able to register on the holiday homes site so I can offer cottages for rent. ✅ user: same for tenant and landlord
+As a landlord, I want to be able to log in to the holiday homes site so I can offer a cottage for rent. ---- > 
+As a landlord, I want to offer a cottage so others can rent it.
+
 As a landlord, I want an overview of my own cottages so I can manage them.
 As a tenant, I want an overview of my reservations so I can manage them.
 As a landlord, I want to be able to cancel a reservation for a cottage so I can retain control over my cottage.

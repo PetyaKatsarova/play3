@@ -1,18 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-</head>
-<body>
-<script>
-    console.log("Immediate check:", localStorage.getItem("jwtToken"));
-</script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 50px 0;
+        }
 
-<h1>You made it :) welkome to the cool members' page</h1>
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+<h1>You made it :) welcome to the cool members' page</h1>
+
+<button id="lookingToRent">I am looking to rent a vacation house</button>
+<button id="rentingOut">I am renting out my house/s</button>
+
 <script>
-    console.log("JWT Token from localStorage: :", localStorage.getItem("jwtToken"));  // Assuming you stored the JWT under the key "jwtToken"
+    console.log("JWT Token from localStorage: :", localStorage.getItem("jwtToken"));
 </script>
 </body>
+<script>
+    document.getElementById('rentingOut').addEventListener('click', function() {
+        window.location.href = 'registerHouse.html';
+    });
+</script>
+
 </html>
+

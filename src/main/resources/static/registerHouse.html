@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register House for Rent</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 50px 0;
+        }
+
+        form {
+            width: 60%;
+            margin: 0 auto;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            width: 250px;
+            text-align: right;
+            margin-right: 15px;
+        }
+
+        .input-group input {
+            flex-grow: 1;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+<h1>Register your House for Rent</h1>
+
+<form id="houseForm">
+    <div class="input-group">
+        <label for="addressCode">Postal Code:</label>
+        <input type="text" id="addressCode" name="addressCode" required>
+    </div>
+
+    <div class="input-group">
+        <label for="street">Street:</label>
+        <input type="text" id="street" name="street" required>
+    </div>
+
+    <div class="input-group">
+        <label for="number">Number:</label>
+        <input type="number" id="number" name="number" required>
+    </div>
+
+    <div class="input-group">
+        <label for="addition">Addition (if any):</label>
+        <input type="text" id="addition" name="addition">
+    </div>
+
+    <div class="input-group">
+        <label for="people">Number of People:</label>
+        <input type="number" id="people" name="people" required>
+    </div>
+
+    <div class="input-group">
+        <label for="rooms">Number of Rooms:</label>
+        <input type="number" id="rooms" name="rooms" required>
+    </div>
+
+    <div class="input-group">
+        <label for="price">Price per Person per Night:</label>
+        <input type="number" id="price" name="price" required>
+    </div>
+
+    <button type="submit">Register</button>
+</form>
+<script>
+    document.getElementById("houseForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // prevent the default form submit action
+
+        const houseDetails = {
+            code: document.getElementById("addressCode").value,
+            street: document.getElementById("street").value,
+            number: document.getElementById("number").value,
+            addition: document.getElementById("addition").value,
+            numberOfPeople: document.getElementById("numberOfPeople").value,
+            numberOfRooms: document.getElementById("numberOfRooms").value,
+            pricePerPerosnPerNight: document.getElementById("pricePerPerosnPerNight").value,
+            // need to add landlordId !!!!
+        };
+
+        saveOrUpdateHouse(houseDetails);
+    });
+
+    function saveOrUpdateHouse(houseDetails) {
+        fetch('/houses/save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(houseDetails)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if(data && data.id) {
+                    alert("House details saved successfully with ID: " + data.id);
+                } else {
+                    alert("Error saving house details!");
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("An error occurred while saving house details.");
+            });
+    }
+
+</script>
+
+</body>
+</html>
