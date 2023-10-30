@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+
+<h1>Would you like to rent a vacation house?</h1>
+
+<div class="button-section">
+    <button id="displayLogin">Login</button>
+    <button id="displayRegistration">Register</button>
+</div>
+
+<form id="loginForm">
+    <label for="loginEmail">Email:</label>
+    <input type="text" id="loginEmail" name="loginEmail" required><br><br>
+
+    <label for="loginPassword">Password:</label>
+    <input type="password" id="loginPassword" name="loginPassword" required><br><br>
+
+    <input type="submit" value="login">
+</form>
+<form id="registrationForm">
+    <label for="registrationUsername">Username:</label>
+    <input type="text" id="registrationUsername" name="registrationUsername" required><br><br>
+    <label for="registrationEmail">Email:</label>
+    <input type="text" id="registrationEmail" name="registrationEmail" required><br><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br><br>
+    <label for="passwordConfirm">Password Confirm:</label>
+    <input type="password" id="passwordConfirm" name="passwordConfirm" required><br><br>
+
+    <input type="submit" value="register">
+</form>
+
+<img src="/images/grass_house.jpg" alt="Grass House">
+<img src="/images/palm_house.jpg" alt="Palm House">
+
+<script>
+    const loginForm = document.getElementById("loginForm");
+    const registrationForm = document.getElementById("registrationForm");
+    console.log(loginForm, registrationForm);
+
+  document.getElementById("displayLogin").addEventListener("click", (e) => {
+      if (registrationForm.style.display !== "none")
+          registrationForm.style.display = "none";
+      loginForm.style.display = (loginForm.style.display === "none" || loginForm.style.display === "") ? "block" : "none";
+  });
+
+    document.getElementById("displayRegistration").addEventListener("click", (e) => {
+        if (loginForm.style.display !== "none")
+            loginForm.style.display = "none";
+        registrationForm.style.display = (registrationForm.style.display === "none" || registrationForm.style.display === "") ? "block" : "none";
+    });
+</script>
+
+</body>
+</html>
