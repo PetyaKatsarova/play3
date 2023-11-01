@@ -1,10 +1,10 @@
-# play3
-This is a vacation houses to book web app. Here you can book or rent your vacation house. In play3/vakantiehuisjes.pdf you can read the complete info about some of its functionalities.
+=# play3
+This is a web app on which one can book or offer for rent vacation house/s. In play3/vakantiehuisjes.pdf you can read more details.
 The app is created with spring boot, jdk 21. You need to create application.properties file in you resources folder. The content should be something like: 
 
 spring.datasource.url=jdbc:mysql://localhost:3306/try3
-spring.datasource.username=root
-spring.datasource.password=changeMe123@!
+spring.datasource.username=YOUR_USERNAME
+spring.datasource.password=YOUR_PASSWORD
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.jpa.hibernate.ddl-auto=update
 
@@ -24,7 +24,7 @@ spring.mail.properties.mail.smtp.ssl.trust=*
 ---- end of application.properties file ------------------
 
 !NB: open from browser with url: "localhost:8080/"
-if you open the .html files from intelij, it opens with localhost:63342/....the complete project route....
+if you open the .html files from intelij, it opens with localhost:63342/.....
 
 ********************** USER STORIES *********************
 
