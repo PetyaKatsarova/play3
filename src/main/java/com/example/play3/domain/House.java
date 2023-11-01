@@ -11,11 +11,11 @@ public class House {
     private Long houseId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "landlordId")
+    @JoinColumn(name = "landlordId") // fk
     private Landlord landlord;
 
     @Column(nullable = false)
-    private String code;
+    private String postalCode;
 
     @Column(nullable = false)
     private String street;
@@ -37,7 +37,7 @@ public class House {
     public House(Long houseId, Landlord landlord, String code, String street, String number, String addition, Integer numberOfPeople, Integer numberOfRooms, Double pricePerPersonPerNight) {
         this.houseId = houseId;
         this.landlord = landlord;
-        this.code = code;
+        this.postalCode = code;
         this.street = street;
         this.number = number;
         this.addition = addition;

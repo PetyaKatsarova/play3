@@ -9,7 +9,6 @@ h1, h3{
 
 .button-section {
     background-color: #a3a367;
-    /*#f4f4f4*/
     color: navajowhite;
     padding: 2em;
     border-radius: 10px;
@@ -18,7 +17,6 @@ h1, h3{
     display: flex;
     justify-content: center;
     align-items: center;
-    /*flex-direction: column;*/
 }
 
 button {
@@ -29,7 +27,7 @@ button {
     color: wheat;
 }
 
-#loginForm, #registrationForm {
+#loginTenantForm, #loginLandlordForm, #registrationForm, #register-success, #login-success, #search-input{
     margin-top: 2.2em;
     display: none;
 }

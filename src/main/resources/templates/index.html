@@ -11,53 +11,55 @@
 <h1>Would you like to rent a vacation house?</h1>
 
 <div class="button-section">
-    <button id="displayLogin">Login</button>
     <button id="displayRegistration">Register</button>
+    <button id="displayTenantLogin">Login as a Tenant</button>
+    <button id="displayLandlordLogin">Login as a Landlord</button>
 </div>
+<input type="text" placeholder="search" id="search-input"/>
 
-<form id="loginForm">
-    <label for="loginEmail">Email:</label>
-    <input type="text" id="loginEmail" name="loginEmail" required><br><br>
+<form id="loginTenantForm" method="post" action="/login/tenant">
+    <label for="loginTenantEmail">Email:</label>
+    <input type="text" id="loginTenantEmail" name="loginTenantEmail" required><br><br>
 
-    <label for="loginPassword">Password:</label>
-    <input type="password" id="loginPassword" name="loginPassword" required><br><br>
+    <label for="loginTenantPassword">Password:</label>
+    <input type="password" id="loginTenantPassword" name="loginTenantPassword" required><br><br>
 
-    <input type="submit" value="login">
+    <input type="submit" value="loginTenant">
 </form>
-<form id="registrationForm">
+<form id="loginLandlordForm" method="post" action="/login/landlord">
+    <label for="loginLandlordEmail">Email:</label>
+    <input type="text" id="loginLandlordEmail" name="loginLandlordEmail" required><br><br>
+
+    <label for="loginLandlordPassword">Password:</label>
+    <input type="password" id="loginLandlordPassword" name="loginLandlordPassword" required><br><br>
+
+    <input type="submit" value="loginLandlord">
+</form>
+<form id="registrationForm" method="post" action="/register">
     <label for="registrationUsername">Username:</label>
     <input type="text" id="registrationUsername" name="registrationUsername" required><br><br>
     <label for="registrationEmail">Email:</label>
     <input type="text" id="registrationEmail" name="registrationEmail" required><br><br>
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required><br><br>
-    <label for="passwordConfirm">Password Confirm:</label>
-    <input type="password" id="passwordConfirm" name="passwordConfirm" required><br><br>
+    <label for="registrationPassword">Password:</label>
+    <input type="password" id="registrationPassword" name="registrationPassword" required><br><br>
+    <label for="registrationPasswordConfirm">Password Confirm:</label>
+    <input type="password" id="registrationPasswordConfirm" name="registrationPasswordConfirm" required><br><br>
 
     <input type="submit" value="register">
 </form>
-
+<div id="registerSuccess">
+    <p>You have successfully registered. You need to click on the confirmation link in your email before logging in. We are glad you are here.</p>
+</div>
+<div id="loginTenantSuccess">
+    <p>You have successfully logged in as a TENANT and can search for and book a house/s. Enjoy your holidays 🍀</p>
+</div>
+<div id="loginLandlordSuccess">
+    <p>You have successfully logged in as a LANDLORD and offer your property for rent 🌳</p>
+</div>
 <img src="/images/grass_house.jpg" alt="Grass House">
 <img src="/images/palm_house.jpg" alt="Palm House">
 
-<script>
-    const loginForm = document.getElementById("loginForm");
-    const registrationForm = document.getElementById("registrationForm");
-    console.log(loginForm, registrationForm);
-
-  document.getElementById("displayLogin").addEventListener("click", (e) => {
-      if (registrationForm.style.display !== "none")
-          registrationForm.style.display = "none";
-      loginForm.style.display = (loginForm.style.display === "none" || loginForm.style.display === "") ? "block" : "none";
-  });
-
-    document.getElementById("displayRegistration").addEventListener("click", (e) => {
-        if (loginForm.style.display !== "none")
-            loginForm.style.display = "none";
-        registrationForm.style.display = (registrationForm.style.display === "none" || registrationForm.style.display === "") ? "block" : "none";
-    });
-</script>
-
+<script src="/js/index.js"></script>
 </body>
 </html>

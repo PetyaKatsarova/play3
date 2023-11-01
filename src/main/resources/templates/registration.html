@@ -25,37 +25,7 @@
 <!--<a href="/play3/src/main/resources/static/loginPage.html">Already have an account? Go to login page!</a>-->
 <a href="/templates/loginPage.html">Already have an account? Go to login page!</a>
 
-<script>
-    document.getElementById('registrationForm').addEventListener('submit', function (e) {
-        e.preventDefault();  // Prevent the default form submission
-
-        if (document.querySelector("#password").value !== document.querySelector("#passwordConfirm").value) {
-            alert("your pword and confirmedpwd dont match, fix it");
-            return;
-        }
-
-        const formData = new FormData(e.target);
-
-
-        const jsonData = {};
-        formData.forEach((val, key) => jsonData[key] = val)
-        fetch('http://localhost:8080/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(jsonData)
-        })
-            .then(response => response.text())
-            .then(data => {
-                alert(data);
-                if (data === "Registration successful. You can now log in.")
-                    window.location.href = 'http://localhost:8080/login';
-            })
-            .catch(error => {
-                alert('Error registering: ' + error);
-            });
-    });
+<script src="/js/index.js">
 
 
     //     fetch('http://localhost:8080/register', {
